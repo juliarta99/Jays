@@ -7,6 +7,9 @@ body{
       font-family: 'Poppins', sans-serif;
       background:white;
 }
+.ml-1{
+      margin-left: 1.5rem;
+}
 /* humberger */
 .humberger{
       display: none;
@@ -237,6 +240,7 @@ h1{
       transition: .5s;
       width: 250px;
       height: 250px;
+      object-fit: cover;
 }
 .img-tambah{
       opacity: .6;
@@ -404,17 +408,12 @@ select{
       width: 50px;
       height: 50px;
 }
-.edit-product,
-.hapus-product{
+.edit-product{
       width: 30px;
       height: 30px;
-      background-color: #eee;
+      background-color: orange;
       padding: 5px;
       border-radius: 3px;
-      margin-right: 10px;
-}
-.hapus-product{
-      background-color: rgb(221, 67, 67);
 }
 .img-pesan{
       width: 400px;
@@ -812,25 +811,6 @@ tbody tr td{
 .jumlah-produk-dibeli{
       padding: 20px 20px 0px 20px;
 }
-.table-salad,
-.table-virgin,
-.table-redcoco,
-.table-orange{
-      border-radius: 5px;
-      padding: 10px 20px;
-}
-.table-salad{
-      background-color: rgb(235, 157, 157);
-}
-.table-virgin{
-      background-color: rgb(141, 231, 141);
-}
-.table-redcoco{
-      background-color: rgb(221, 67, 67);
-}
-.table-orange{
-      background-color: rgb(230, 183, 95);
-}
 .order-belum,
 .order-berhasil{
       background-color: green;
@@ -842,54 +822,10 @@ tbody tr td{
 .order-belum{
       background-color: rgb(221, 67, 67);
 }
-.tampil-form-laba{
-      color: rgb(221, 67, 67);
-      margin-left: 20px;
-      margin-bottom: 10px;
-}
-.keuntungan{
-      display: none;
-}
-.total-harga{
-      font-weight: bold;
-      font-size: 20px;
-}
-.form-laba{
-      padding: 0 20px;
-}
-.label-laba{
-      font-size: 12px;
-      margin-top: 10px;
-}
-.hitung-total-produksi,
-.tampil-form-laba{
-      padding: 5px 10px;
-      border: none;
-      background-color: rgb(221, 67, 67);
-      margin-top: 20px;
-      border-radius: 3px;
-      color: white;
-}
-.table-laba{
-      width: 50%;
-      padding: 0;
-      margin-top: 10px;
-      margin-left: 20px;
-      text-align: left;
-}
-.table-laba tr th,
-.table-laba tr td{
-      box-shadow: 0 0 0 0;
-}
-.total-produksi{
-      font-size: 20px;
-}
-.laba{
-      font-size: 25px;
-}
-.persentase-laba{
-      font-size: 15px;
-      opacity: .7;
+tr img.img-produk{
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
 }
 
 /* order end */

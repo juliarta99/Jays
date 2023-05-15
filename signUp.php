@@ -1,5 +1,5 @@
 <?php
-require "../functions.php";
+require "functions.php";
 
 if( isset($_POST["submit"])){
       if(signUp($_POST) > 0){
@@ -23,7 +23,7 @@ if( isset($_POST["submit"])){
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
       <title>Sign Up</title>
-      <link rel="stylesheet" href="../style.css">
+      <link rel="stylesheet" href="style.css">
 </head>
 <body>
       <div id="sign-up">
@@ -36,7 +36,7 @@ if( isset($_POST["submit"])){
                   <button name="submit" id="submit" type="submit">SIGN UP</button>
                   <a href="login.php" class="sign-in">Sudah punya akun?</a>
             </form>
-            <img src="../img/backgroundMojito.png" class="img-login" alt="background">
+            <img src="img/backgroundMojito.png" class="img-login" alt="background">
       </div>
 </body>
 </html>

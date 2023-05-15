@@ -1,11 +1,11 @@
 <?php
 session_start();
 if( isset($_SESSION["login"])) {
-      header("Location: ../index.php");
+      header("Location: index.php");
       exit;
 }
 
-require "../functions.php";
+require "functions.php";
 if(isset($_POST["login"])){
       $username = $_POST["username"];
       $password = $_POST["password"];
@@ -27,8 +27,14 @@ if(isset($_POST["login"])){
                         'level' => $row["level"],
                   );
 
-                  header("Location: ../index.php");
-                  exit;
+                  if($_SESSION['user']['level'] == 0) {
+                        header("Location: index.php");
+                        exit;
+                  } elseif($_SESSION['user']['level'] == 1) {
+                        header("Location: dashboard/index.php");
+                        exit;
+                  }
+
             }
       }
       $error = true;
@@ -51,11 +57,11 @@ endif;
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
       <title>Sign In</title>
-      <link rel="stylesheet" href="../style.css">
+      <link rel="stylesheet" href="style.css">
 </head>
 <body>
       <div id="login">
-            <img src="../img/backgroundMojito.png" class="img-login" alt="background">
+            <img src="img/backgroundMojito.png" class="img-login" alt="background">
             <form action="" method="post" class="form-login">
                   <h1>LOGIN</h1>
                   <div class="underline-login"></div>

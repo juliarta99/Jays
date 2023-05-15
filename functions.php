@@ -58,14 +58,12 @@ function pesan($order){
       $idProduct = $_GET["id"];
       $idUser = $_SESSION['user']['id'];
       $topping = $order["topping"];
-      $tglPesan = date("y-m-d");
+      $tgl_pengiriman = $order["tgl_pengiriman"];
       $noHP = $order["noHP"];
       $alamat = $order["alamat"];
-      $kelas = $order["kelas"];
       $kuantitas = $order["kuantitas"];
 
-      mysqli_query($conn, "INSERT INTO pesanan 
-      VALUES('', '$idUser', '$idProduct', '$topping', '$tglPesan', '$noHP', '$alamat','$kelas', '$kuantitas', '')");
+      mysqli_query($conn, "INSERT INTO pesanan(id_user, id_product, topping, tgl_pengiriman, no_hp, alamat, kuantitas) VALUES('$idUser', '$idProduct', '$topping', '$tgl_pengiriman', '$noHP', '$alamat', '$kuantitas')");
 
       return mysqli_affected_rows($conn);
 }
@@ -80,6 +78,39 @@ function contact($contact){
       VALUES('', '$email', '$pesan')");
 
       return mysqli_affected_rows($conn);
+}
+
+function upload(){
+      $namaFile = $_FILES['gambar']['name'];
+      $ukuranFile = $_FILES['gambar']['size'];
+      $tmpName = $_FILES['gambar']['tmp_name'];
+
+      // cek ekstensi file
+      $ektensiGambarValid = array('jpg', 'jpeg', 'png', 'webp');
+      $ekstensiGambar = explode('.', $namaFile);
+      $ekstensiGambar = strtolower(end($ekstensiGambar));
+      if( !in_array($ekstensiGambar, $ektensiGambarValid)) {
+            echo "<script>
+                        alert('Ekstensi gambar salah Ektensi gambar = png');
+                  </script>";
+            return false;
+      }
+
+      // cek ukuran file
+      if($ukuranFile > 1000000){
+            echo  "<script>
+                        alert('Ukuran file terlalu besar!! Ukuran max 1 MB');
+                  </script>";
+            return false;
+      }
+      
+      // ubah naama file ke nama random
+      $namaFileBaru = uniqid();
+      $namaFileBaru .= '.';
+      $namaFileBaru .= $ekstensiGambar;
+      move_uploaded_file($tmpName, '../img/' . $namaFileBaru);
+
+      return $namaFileBaru;
 }
 
 function tambah($tambah){
@@ -119,36 +150,8 @@ function edit($edit){
                         deskripsi='$deskripsi'
                         WHERE id=$idProduct");
       }else{
-            $namaFile = $_FILES['gambar']['name'];
-            $ukuranFile = $_FILES['gambar']['size'];
-            $tmpName = $_FILES['gambar']['tmp_name'];
-      
-            // cek ekstensi file
-            $ektensiGambarValid = ['png'];
-            $ekstensiGambar = explode('.', $namaFile);
-            $ekstensiGambar = strtolower(end($ekstensiGambar));
-            if( !in_array($ekstensiGambar, $ektensiGambarValid)) {
-                  echo "<script>
-                              alert('Ekstensi gambar salah Ektensi gambar = png');
-                        </script>";
-                  return false;
-            }
-      
-            // cek ukuran file
-            if($ukuranFile > 1000000){
-                  echo  "<script>
-                              alert('Ukuran file terlalu besar!! Ukuran max 1 MB');
-                        </script>";
-                  return false;
-            }
-            
-            // ubah nama file ke nama random
-            $namaFileBaru = uniqid();
-            $namaFileBaru .= '.';
-            $namaFileBaru .= $ekstensiGambar;
-            move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
-            // masukkan nama file baru ke variabel gambar
-            $gambar = $namaFileBaru;
+            $gambar = upload();
+            unlink('../img/'.$gambarLama);
             // jika ada foto yang diupload
             mysqli_query($conn, "UPDATE product SET
                         id='$idProduct',
@@ -160,39 +163,6 @@ function edit($edit){
       }
       
       return mysqli_affected_rows($conn);
-}
-
-function upload(){
-      $namaFile = $_FILES['gambar']['name'];
-      $ukuranFile = $_FILES['gambar']['size'];
-      $tmpName = $_FILES['gambar']['tmp_name'];
-
-      // cek ekstensi file
-      $ektensiGambarValid = ['png'];
-      $ekstensiGambar = explode('.', $namaFile);
-      $ekstensiGambar = strtolower(end($ekstensiGambar));
-      if( !in_array($ekstensiGambar, $ektensiGambarValid)) {
-            echo "<script>
-                        alert('Ekstensi gambar salah Ektensi gambar = png');
-                  </script>";
-            return false;
-      }
-
-      // cek ukuran file
-      if($ukuranFile > 1000000){
-            echo  "<script>
-                        alert('Ukuran file terlalu besar!! Ukuran max 1 MB');
-                  </script>";
-            return false;
-      }
-      
-      // ubah naama file ke nama random
-      $namaFileBaru = uniqid();
-      $namaFileBaru .= '.';
-      $namaFileBaru .= $ekstensiGambar;
-      move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
-
-      return $namaFileBaru;
 }
 
 function cari($keyword){

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../functions.php";
+require "functions.php";
 
 if(!isset($_SESSION["login"])){
       header("Location: login.php");
@@ -12,8 +12,8 @@ $idProduct = $_GET["id"];
 if(isset($_POST["submit"])){
       if(pesan($_POST) > 0 ){
             echo  '<script>
-                        alert("Pesanan berhasil dibuat!\nPesanan akan diterima pada saat bazzar!!"); 
-                        window.location.href="../back/redirectPesanan.php";
+                        alert("Pesanan berhasil dibuat!"); 
+                        window.location.href="app/redirectPesanan.php";
                   </script>';
       }else{
            echo mysqli_error($conn);
@@ -35,7 +35,7 @@ $namaProduct = mysqli_query($conn, "SELECT nama FROM product WHERE id = '$idProd
       <!-- nama product start -->
       <?php while($nama = mysqli_fetch_assoc($namaProduct)): ?>
       <title>Pesan <?= $nama["nama"]; ?></title>
-      <link rel="stylesheet" href="../style.css">
+      <link rel="stylesheet" href="style.css">
 </head>
 <body>
       <div id="memesan">
@@ -50,11 +50,11 @@ $namaProduct = mysqli_query($conn, "SELECT nama FROM product WHERE id = '$idProd
                   <label for="alamat" class="label-pesan">Alamat:</label>
                   <input type="text" name="alamat" id="alamat" class="input-pesan" required placeholder="Jln.,Keluharan,Kabupaten">
 
-                  <label for="kelas" class="label-pesan">Kelas:</label>
-                  <input type="text" name="kelas" id="kelas" class="input-pesan" placeholder="XI RPL2">
-
                   <label for="kuantitas" class="label-pesan">Kuantitas</label>
                   <input type="number" name="kuantitas" id="kuantitas" class="input-pesan" required placeholder="1">
+
+                  <label for="tgl_pengiriman" class="label-pesan">Tanggal Pengiriman</label>
+                  <input type="datetime-local" name="tgl_pengiriman" id="tgl_pengiriman" class="input-pesan" required>
                   
                   <?php if($idProduct == 1) { ?>
                   <label for="topping" class="label-pesan">Topping</label>
@@ -65,9 +65,8 @@ $namaProduct = mysqli_query($conn, "SELECT nama FROM product WHERE id = '$idProd
                         <option value="Cheese & Fruit">Cheese & Fruit</option>
                   </select>
                   <?php } ?>
-                  <p class="bazzar">Pesanan akan diterima pada saat bazzar (08 November 2022)</p>
                   <div class="kondisi">
-                        <a href="../product.php" name="batal" id="batal"
+                        <a href="product.php" name="batal" id="batal"
                               onclick="return confirm('Apakah anda yakin ingin membatalkan orderan ini?')";>Batal</a>
                         <button name="submit" type="submit" id="pesan">Pesan</button>
                   </div>

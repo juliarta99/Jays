@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../functions.php";
+require "functions.php";
 
 if(!isset($_SESSION["login"])){
       header("Location: login.php");
@@ -33,7 +33,7 @@ $product = mysqli_query($conn, "SELECT * FROM product WHERE id = '$idProduct'");
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
       <title>Chechk Out</title>
-      <link rel="stylesheet" href="../style.css">
+      <link rel="stylesheet" href="style.css">
 </head>
 <body>
       <!-- content start -->
@@ -41,23 +41,12 @@ $product = mysqli_query($conn, "SELECT * FROM product WHERE id = '$idProduct'");
             <div class="left-pesan">
                   <div class="header-leftPesan">
                         <div class="kembali">
-                              <a href="../product.php"><img src="../img/kembali.png" class="img-kembali" alt="Kembali"></a>
+                              <a href="product.php"><img src="img/kembali.png" class="img-kembali" alt="Kembali"></a>
                         </div>
                         <?php while($isiProduct = mysqli_fetch_assoc($product)): ?>
-                        <?php if($_SESSION['user']['level'] == 1){ ?>
-                        <div class="kondisi-leftPesan">
-                              <a href="editProduct.php?id=<?= $isiProduct["id"]; ?>">
-                                    <img src="../img/ubah.png" class="edit-product" alt="edit">
-                              </a>
-                              <a href="../back/hapusProduct.php?id=<?= $isiProduct["id"]; ?>"
-                                    onclick="return confirm('Apakah anda yakin ingin menghapus product ini?')">
-                                    <img src="../img/hapus.png" class="hapus-product" alt="hapus">
-                              </a>
-                        </div>
-                        <?php } ?>
                   </div>
                   <div class="namaHarga-pesan">
-                        <img src="../img/<?= $isiProduct["gambar"]; ?>" class="img-pesan" alt="Salad Buah">
+                        <img src="img/<?= $isiProduct["gambar"]; ?>" class="img-pesan" alt="Salad Buah">
                         <h3 class="nama-pesan"><?= $isiProduct["nama"]; ?></h3>
                         <h5 class="harga-pesan">Rp. <?=$isiProduct["harga"]; ?></h5>
                         <a href="pesan.php?id=<?= $idProduct; ?>" class="chechk-out">Checkout</a>
@@ -91,7 +80,7 @@ $product = mysqli_query($conn, "SELECT * FROM product WHERE id = '$idProduct'");
                                                       <?php if($_SESSION['user']['id'] == $komen["id"] ){ ?>
                                                       <a href="../back/hapusKomentar.php?id=<?= $komen["id_komentar"]; ?>"
                                                             onclick="return confirm('Apakah anda yakin ingin menghapus komentar ini?');">
-                                                            <img src="../img/hapus.png" class="img-hapusKomentar" alt="Hapus">
+                                                            <img src="img/hapus.png" class="img-hapusKomentar" alt="Hapus">
                                                       </a>
                                                       <?php }; ?>
                                                 </div>
@@ -102,7 +91,7 @@ $product = mysqli_query($conn, "SELECT * FROM product WHERE id = '$idProduct'");
                         </div>
                         <div class="tulis-komentar">
                               <input type="text" name="komentar" id="komentar" required placeholder="semuanya enak banget">
-                              <button name="submit" type="submit" id="kirim"><img src="../img/kirim.png" class="img-kirim" alt="Kirim"></button>
+                              <button name="submit" type="submit" id="kirim"><img src="img/kirim.png" class="img-kirim" alt="Kirim"></button>
                         </div>
                   </form>
             </div>

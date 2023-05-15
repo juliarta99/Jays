@@ -3,7 +3,7 @@ session_start();
 require "functions.php";
 
 if(!isset($_SESSION["login"])){
-      header("Location: app/login.php");
+      header("Location: login.php");
       exit;
 }
 
@@ -41,19 +41,16 @@ if(isset($_POST["submit"])) {
                         <li><a href="product.php" class="nav-link">Product</a></li>
                         <li><a href="about.php" class="nav-link">About</a></li>
                         <li><a href="contact.php" class="nav-link">Contact</a></li>
-                        <?php if($_SESSION['user']['level'] == 1) {?>
-                        <li><a href="konfirmasiOrder.php" class="nav-link">Orders</a></li>
-                        <?php } ?>
                   </ul>
                   <li class="li-profile">
                               <div class="show-profile">
                                     <img src="img/iconProfile.png" class="img-showProfile" alt="Icon Profile">
                                     <div class="menu-profile">
-                                    <a href="app/pesanan.php?id=<?= $_SESSION['user']['id']; ?>" class="list-menu-profile">
+                                    <a href="pesanan.php?id=<?= $_SESSION['user']['id']; ?>" class="list-menu-profile">
                                           <img src="img/orders.png" class="img-menuProfile" alt="Profile">
                                           Pesanan
                                     </a>
-                                    <a href="back/logout.php" class="list-menu-profile"
+                                    <a href="app/logout.php" class="list-menu-profile"
                                           onclick="return confirm('Apakah anda yakin ingin logout?')";>
                                           <img src="img/logout.png" alt="Logout" class="img-menuProfile">
                                           Logout
@@ -95,12 +92,12 @@ if(isset($_POST["submit"])) {
                         </a>
                   </li>
                   <li class="social_content" title="Instagram">
-                        <a href="https://instagram.com/riyanthi_ng?igshid=YmMyMTA2M2Y=">
+                        <a href="https://instagram.com/n.juliarta?igshid=YmMyMTA2M2Y=">
                               <img src="img/instagram.png" class="img_social" alt="instagram">
                         </a>
                   </li>
                   <li class="social_content" title="Whatsapp">
-                        <a href="https://api.whatsapp.com/send?phone=+6281558753036&text=Kak%20saya%20mau%20pesan%20Salad%20Buah">
+                        <a href="https://api.whatsapp.com/send?phone=+6289605880609&text=Kak%20saya%20mau%20pesan%20Salad%20Buah">
                               <img src="img/whatsapp.png" class="img_social" alt="whatsapp">
                         </a>
                   </li>

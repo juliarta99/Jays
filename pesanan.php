@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../functions.php";
+require "functions.php";
 
 if(!isset($_SESSION["login"]) ) {
       header("Location: login.php");
@@ -25,11 +25,11 @@ $vouchers = mysqli_query($conn,
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
       <title>Pesanan</title>
-      <link rel="stylesheet" href="../style.css">
+      <link rel="stylesheet" href="style.css">
 </head>
 <body>
       <div id="pesanan">
-            <a href="../index.php"><img src="../img/kembali.png" class="img-kembali" alt="Kembali"></a>
+            <a href="index.php"><img src="img/kembali.png" class="img-kembali" alt="Kembali"></a>
             <?php while($voucher = mysqli_fetch_assoc($vouchers)): ?>
             <div class="voucher">
                   <div class="content-voucher">
@@ -40,15 +40,15 @@ $vouchers = mysqli_query($conn,
                               <p class="kuantitas-voucher">Jumlah : <?= $voucher["kuantitas"]; ?></p>
                               <h1 class="harga-voucher">Rp. <?= $voucher["harga"] * $voucher["kuantitas"]; ?></h1>
                         </div>
-                        <a href="../back/batalPesanan.php?id=<?php echo $voucher["id"]; ?>" class="batal-pesanan"
+                        <a href="back/batalPesanan.php?id=<?php echo $voucher["id"]; ?>" class="batal-pesanan"
                               onclick="return confirm('Apakah anda yakin ingin membatalkan pesanan ini')">
-                              <img src="../img/hapus.png" class="img-batalPesanan" alt="batal">
+                              <img src="img/hapus.png" class="img-batalPesanan" alt="batal">
                         </a>
-                        <?php if($voucher["kondisi"] == 1) { ?>
-                        <img src="../img/success.png" class="succes" alt="Succes">
+                        <?php if($voucher["status"] == 1) { ?>
+                        <img src="img/success.png" class="succes" alt="Succes">
                         <?php } ?>
                   </div>
-                  <img src="../img/<?= $voucher["gambar"]; ?>" class="img-voucher" alt="Gambar Voucher">
+                  <img src="img/<?= $voucher["gambar"]; ?>" class="img-voucher" alt="Gambar Voucher">
             </div>
             <?php endwhile; ?>
       </div>

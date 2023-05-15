@@ -2,15 +2,21 @@
 session_start();
 require "../functions.php";
 
+if(!isset($_SESSION["login"]) ) {
+      header("Location: ../login.php");
+      exit;
+}
+
 if($_SESSION['user']['level'] == 0){
-      header('Location: ../index.php');
+      header("HTTP/1.1 403 Forbidden");
+      exit;
 }
 
 if(isset($_POST["submit"])) {
       if(tambah($_POST) > 0){
             echo  "<script>
-                        alert('Product berhasil diubah!!');
-                        window.location.href='../product.php';
+                        alert('Product berhasil ditambahkan!!');
+                        window.location.href='index.php';
                   </script>";
       }else{
             echo mysqli_error($conn);
@@ -27,7 +33,7 @@ if(isset($_POST["submit"])) {
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-      <title>Edit Product</title>
+      <title>Tambah Product</title>
       <link rel="stylesheet" href="../style.css">
 </head>
 <body class="tambahEditProduct">

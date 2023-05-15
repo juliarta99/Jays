@@ -3,7 +3,7 @@ session_start();
 require "functions.php";
 
 if(!isset($_SESSION["login"])){
-      header("Location: app/login.php");
+      header("Location: login.php");
       exit;
 }
 
@@ -33,19 +33,16 @@ $products = mysqli_query($conn, "SELECT * FROM product");
                         <li><a href="product.php" class="nav-link">Product</a></li>
                         <li><a href="about.php" class="nav-link">About</a></li>
                         <li><a href="contact.php" class="nav-link">Contact</a></li>
-                        <?php if($_SESSION['user']['level'] == 1) {?>
-                        <li><a href="konfirmasiOrder.php" class="nav-link">Orders</a></li>
-                        <?php } ?>
                   </ul>
                   <li class="li-profile">
                               <div class="show-profile">
                                     <img src="img/iconProfile.png" class="img-showProfile" alt="Icon Profile">
                                     <div class="menu-profile">
-                                    <a href="app/pesanan.php?id=<?= $_SESSION['user']['id']; ?>" class="list-menu-profile">
+                                    <a href="pesanan.php?id=<?= $_SESSION['user']['id']; ?>" class="list-menu-profile">
                                           <img src="img/orders.png" class="img-menuProfile" alt="Profile">
                                           Pesanan
                                     </a>
-                                    <a href="back/logout.php" class="list-menu-profile"
+                                    <a href="app/logout.php" class="list-menu-profile"
                                           onclick="return confirm('Apakah anda yakin ingin logout?')";>
                                           <img src="img/logout.png" alt="Logout" class="img-menuProfile">
                                           Logout
@@ -68,17 +65,12 @@ $products = mysqli_query($conn, "SELECT * FROM product");
       <div id="product">
             <h1>Product</h1>
             <div class="content-product">
-            <?php if($_SESSION['user']['level'] == 1 ){ ?>
-                  <a href="app/tambahProduct.php" class="tambah-product">
-                        <img src="img/tambah.png" class="img-tambah" alt="tambah product">
-                  </a>
-            <?php } ?>
             <?php while($product = mysqli_fetch_assoc($products)): ?>
                   <div class="product">
                         <img src="img/<?php echo $product["gambar"]; ?>" class="img-product" alt="Salad Buah">
                         <span class="nama-product"><?= $product["nama"]; ?></span>
                         <span class="harga-product">Rp. <?= $product["harga"]; ?></span>
-                        <a href="app/chechkOut.php?id=<?= $product["id"]; ?>" class="beli">Beli</a>
+                        <a href="chechkOut.php?id=<?= $product["id"]; ?>" class="beli">Beli</a>
                   </div>
             <?php endwhile; ?>
             </div>

@@ -8,13 +8,13 @@ if($_SESSION['user']['level'] == 0){
 
 $idPesanan = $_GET["id"];
 $konfirmasi = mysqli_query($conn, "UPDATE pesanan SET
-                                    kondisi=1
+                                    status=1
                                     WHERE id=$idPesanan");
 
 if($konfirmasi > 0){
       echo  "<script>
                   alert('Pesanan berhasil dikonfirmasi!!'); 
-                  window.location.href='../konfirmasiOrder.php';
+                  window.location.href='../dashbaord/konfirmasiOrder.php';
             </script>";
 }else{
       echo mysqli_error($conn);

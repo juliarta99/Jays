@@ -2,8 +2,14 @@
 session_start();
 require "../functions.php";
 
+if(!isset($_SESSION["login"]) ) {
+      header("Location: ../login.php");
+      exit;
+}
+
 if($_SESSION['user']['level'] == 0){
-      header('Location: ../index.php');
+      header("HTTP/1.1 403 Forbidden");
+      exit;
 }
 
 $idProduct = $_GET["id"];
@@ -11,7 +17,7 @@ if(isset($_POST["submit"])) {
       if(edit($_POST) > 0){
             echo  "<script>
                         alert('Product berhasil diubah!!');
-                        window.location.href='../product.php';
+                        window.location.href='index.php';
                   </script>";
       }else{
             echo mysqli_error($conn);
@@ -35,21 +41,21 @@ if(isset($_POST["submit"])) {
       <form method="POST" class="form-edit" enctype="multipart/form-data">
             <?php $product = mysqli_query($conn, "SELECT * FROM product WHERE id=$idProduct");
             while($isiProduct = mysqli_fetch_assoc($product)): ?>
-            <label for="nama" class="label-edit">Nama :</label>
-            <input type="text" name="nama" class="input-edit" id="nama" value="<?= $isiProduct["nama"]; ?>" required>
+                  <label for="nama" class="label-edit">Nama :</label>
+                  <input type="text" name="nama" class="input-edit" id="nama" value="<?= $isiProduct["nama"]; ?>" required>
 
-            <label for="harga" class="label-edit">Harga :</label>
-            <input type="number" name="harga" class="input-edit" id="harga" value="<?= $isiProduct["harga"] ?>" required>
+                  <label for="harga" class="label-edit">Harga :</label>
+                  <input type="number" name="harga" class="input-edit" id="harga" value="<?= $isiProduct["harga"] ?>" required>
 
-            <label for="gambar" class="label-edit">Gambar:</label>
-            <input type="file" name="gambar" class="input-edit" id="gambar">
-            <input type="hidden" name="gambarLama" value="<?= $isiProduct["gambar"]; ?>">
+                  <label for="gambar" class="label-edit">Gambar:</label>
+                  <input type="file" name="gambar" class="input-edit" id="gambar" accept="image/*">
+                  <input type="hidden" name="gambarLama" value="<?= $isiProduct["gambar"]; ?>">
 
-            <label for="deskripsi" class="label-edit">Deskripsi :</label>
-            <textarea name="deskripsi" class="input-edit" id="deskripsi" cols="30" rows="10" required><?= $isiProduct["deskripsi"]; ?></textarea>
+                  <label for="deskripsi" class="label-edit">Deskripsi :</label>
+                  <textarea name="deskripsi" class="input-edit" id="deskripsi" cols="30" rows="10" required><?= $isiProduct["deskripsi"]; ?></textarea>
             <?php endwhile; ?>    
             <div class="kondisi-edit">
-                  <a href="../product.php" class="batal-product">Batal</a>
+                  <a href="index.php" class="batal-product">Batal</a>
                   <button type="submit" class="submit-product" name="submit">Ubah</button>
             </div>
       </form>
